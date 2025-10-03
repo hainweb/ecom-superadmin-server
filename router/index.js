@@ -68,7 +68,7 @@ router.get("/get-all-coupons",couponController.getAllCoupons)
 
 router.get("/get-sliders", userDisplayController.getSliders);
 router.post("/add-slider", uploadSlider.single("image"), userDisplayController.addSlider);
-router.post("/delete-slider", userDisplayController.deleteSlider);
+router.delete("/delete-slider/:id", userDisplayController.deleteSlider);
 
 
 
