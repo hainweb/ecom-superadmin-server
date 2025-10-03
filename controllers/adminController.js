@@ -21,7 +21,9 @@ module.exports = {
           .json(
             response.message
               ? { message: response.message }
-              : { message: `Admin created successfully \nPassword sended to ${Email}` }
+              : {
+                  message: `Admin created successfully \nPassword sended to ${Email}`,
+                }
           );
         console.log("Admin created successfully:", response);
       } else {
@@ -71,6 +73,15 @@ module.exports = {
     } catch (error) {
       res.status(500).json({ messgae: "Internal server error" });
     }
+  },
+
+  getMerchantRequests: async (req, res) => {
+    try {
+      console.log('api call goted');
+      
+      const response = await adminModels.getMerchantRequests();
+      res.json(response);
+    } catch (error) {}
   },
 
   deleteAdmin: async (req, res) => {
