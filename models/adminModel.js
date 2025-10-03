@@ -28,12 +28,12 @@ module.exports = {
         Password: hashedPassword,
       });
 
-   await sendEmail({
-      to: Email,
-      subject: "Your Admin Account Details",
-      text: `Hello ${Name},\n\nYour admin account has been created.\n\nEmail: ${Email}\nPassword: ${Password}\n\nPlease login and change your password.`,
-    });
-      
+      await sendEmail({
+        to: Email,
+        subject: "Your Admin Account Details",
+        text: `Hello ${Name},\n\nYour admin account has been created.\n\nEmail: ${Email}\nPassword: ${Password}\n\nPlease login and change your password.`,
+      });
+
       return response;
     } catch (error) {
       console.error("Error creating admin:", error);
@@ -60,7 +60,7 @@ module.exports = {
           },
         }
       );
-      return response
+      return response;
     } catch (error) {}
   },
 
@@ -74,7 +74,7 @@ module.exports = {
           },
         }
       );
-      return response
+      return response;
     } catch (error) {}
   },
 
@@ -87,6 +87,17 @@ module.exports = {
     } catch (error) {
       console.error("Error deleting admin:", error);
       throw error;
+    }
+  },
+
+  getMerchantRequests: async () => {
+    try {
+      const response = await adminCollection().find({ isApproved: false }).toArray()
+     
+      
+      return response
+    } catch (error) {
+      console.error(error);
     }
   },
 };
