@@ -16,15 +16,13 @@ module.exports = {
       });
 
       if (response) {
-        res
-          .status(201)
-          .json(
-            response.message
-              ? { message: response.message }
-              : {
-                  message: `Admin created successfully \nPassword sended to ${Email}`,
-                }
-          );
+        res.status(201).json(
+          response.message
+            ? { message: response.message }
+            : {
+                message: `Admin created successfully \nPassword sended to ${Email}`,
+              }
+        );
         console.log("Admin created successfully:", response);
       } else {
         res.status(500).json({ message: "Failed to create admin" });
@@ -77,11 +75,23 @@ module.exports = {
 
   getMerchantRequests: async (req, res) => {
     try {
-      console.log('api call goted');
-      
+      console.log("api call goted");
+
       const response = await adminModels.getMerchantRequests();
       res.json(response);
     } catch (error) {}
+  },
+
+  approveMerchant: async (req, res) => {
+    try {
+      const response = await adminModels.approveMerchant(req.body.merchantId);
+      if (response.acknowledged) {
+        res.json({ status: true, message: "Merhcant approved" });
+      }
+    } catch (error) {
+      console.error(error);
+      res.json({ status: false, message: "Something went wrong" });
+    }
   },
 
   deleteAdmin: async (req, res) => {
