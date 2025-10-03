@@ -190,7 +190,8 @@ module.exports = {
     });
   },
   addSlider: (slider) => {
-    return new Promise((resolve, reject) => {
+    try {
+       return new Promise((resolve, reject) => {
       console.log("Adding slider data:", slider); // Log the input data
 
       const sliderId = new ObjectId();
@@ -236,6 +237,11 @@ module.exports = {
           reject(err);
         });
     });
+    } catch (error) {
+      console.error('err ading cat', error);
+      
+    }
+   
   },
 
   getSliders: () => {
