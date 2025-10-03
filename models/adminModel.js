@@ -92,12 +92,25 @@ module.exports = {
 
   getMerchantRequests: async () => {
     try {
-      const response = await adminCollection().find({ isApproved: false }).toArray()
-     
-      
-      return response
+      const response = await adminCollection()
+        .find({ isApproved: false })
+        .toArray();
+
+      return response;
     } catch (error) {
       console.error(error);
+    }
+  },
+
+  approveMerchant: async (merchantId) => {
+    try {
+      const res = await adminCollection().updateOne(
+        { _id: new ObjectId(merchantId) },
+        { $set: { isApproved: true } }
+      );
+      return res
+    } catch (error) {
+      throw new Error(error);
     }
   },
 };
