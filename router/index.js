@@ -24,6 +24,8 @@ router.get("/get-all-deliveries", deliveryController.getAllDeliveries);
 
 router.get("/all-users", userControllers.getAllUsers);
 
+router.get("/get-merchant-requests",adminController.getMerchantRequests);
+
 router.put("/block-admin/:id", adminController.blockAdmin);
 router.put("/block-delivery/:id", deliveryController.blockDelivery);
 
