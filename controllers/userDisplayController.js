@@ -104,6 +104,7 @@ module.exports = {
     console.log("API call to add slider", req.body, req.file); // multer uses req.file
 
   if (!req.file || !req.body.linkTo) {
+    
     return res.status(400).json({ message: "Missing required fields" });
   } 
 
@@ -115,7 +116,7 @@ module.exports = {
     };
 
     const response = await userDisplayModels.addSlider(sliderData);
-    res.json({ message: "Slider added", slides: response });
+    res.json({ status:true, message: "Slider added", slides: response.slides });
   } catch (error) {
     console.error("Error adding slider:", error);
     res.status(500).json({ message: "Server error", error });
@@ -126,6 +127,8 @@ module.exports = {
 
     try {
       if (!id) {
+        console.log('Slider id is not');
+        
         return res
           .status(400)
           .json({ success: false, message: "Slider ID is required" });
